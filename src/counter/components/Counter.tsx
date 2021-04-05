@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
   decrement,
   increment,
   incrementByAmount,
   incrementAsync,
-  selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+} from 'counter/slices/counterSlice';
+import { selectCount } from 'counter/selectors/counterSelectors';
+import styles from 'counter/components/Counter.module.scss';
 
-export function Counter() {
+export function Counter(): ReactElement {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
