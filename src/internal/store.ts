@@ -1,18 +1,21 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from 'counter/slices/counterSlice';
-import exempleReducer from 'example/slices/exempleSlice';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    exemple: exempleReducer,
-  },
-});
+import rootSaga from 'internal/rootSaga';
+import rootReducer from 'internal/rootReducer';
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+// eslint-disable-next-line
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(sagaMiddleware))
+);
+
+export type AppDispatch = typeof store.dispatch;
+
+sagaMiddleware.run(rootSaga);
+
+export default store;

@@ -1,23 +1,23 @@
-import React, { ReactElement, useCallback, useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import useApi, { Methods } from 'internal/hooks/useApi';
+import React, { ReactElement, useCallback, useMemo } from 'react';
 import Status from 'internal/constants/status';
 
-import { RANDOM_DOG_ENDPOINT } from 'example/constants/endpoints';
-import { selectDog } from 'example/selectors/exempleSelectors';
-import { addDog } from 'example/slices/exempleSlice';
+import styles from 'example/components/Exemple.module.scss';
+import { FetchDogStartType } from 'example/types/actions';
 
 import Spinner from 'fragments/spinner/Spinner';
 
-import styles from 'example/components/Exemple.module.scss';
+export type StateProps = {
+  dogs: string[],
+  status: Status,
+};
 
-const Example = (): ReactElement => {
-  const dogs = useSelector(selectDog);
-  const dispatch = useDispatch();
+export type DispatchProps = {
+  fetchDog: () => FetchDogStartType,
+};
 
-  const { request, response, status } = useApi(Methods.GET, RANDOM_DOG_ENDPOINT);
+type Props = StateProps & DispatchProps;
 
+const Example = ({ status, dogs, fetchDog }: Props): ReactElement => {
   const renderImages = useMemo(() => {
     return dogs.map((dog, i) => (
       <img className={styles.container__image} key={i} src={dog} alt='dogs' />
@@ -25,18 +25,8 @@ const Example = (): ReactElement => {
   }, [dogs]);
 
   const fetchDogImage = useCallback(() => {
-    request();
-  }, [request]);
-
-  useEffect(() => {
-    if (!response) {
-      return;
-    }
-
-    if (response.success) {
-      dispatch(addDog(response.data.dog));
-    }
-  }, [response, dispatch]);
+    fetchDog();
+  }, [fetchDog]);
 
   const renderLoader = useMemo(() => (
     <Spinner />
@@ -45,7 +35,9 @@ const Example = (): ReactElement => {
   return (
     <div className={styles.container}>
       <button className={styles.container__button} onClick={fetchDogImage}>Do an exemple fetch</button>
-      {renderImages}
+      <div className={styles.container__imageWrapper}>
+        {renderImages}
+      </div>
       {status === Status.LOADING && renderLoader}
     </div>
   );

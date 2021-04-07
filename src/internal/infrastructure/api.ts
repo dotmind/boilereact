@@ -3,6 +3,7 @@ import ApiExecutor from '@dotmind/utils/dist/react/ApiExecutor';
 
 import { BASE_URL, TIMEOUT } from 'internal/constants/api';
 
+// eslint-disable-next-line
 export type RequestType = AxiosRequestConfig | Record<string, any>;
 
 function apiInstance() {
