@@ -1,12 +1,10 @@
-# 🌎 GAIA by TOTAL
+# .boilereact
 
 **Menu**
 
 * [💻 NPM commands](#-npm-commands)
 * [👶🏻 Onboarding](#-onboarding)
 * [👷‍♂️ How it's work](#-how-its-work])
-* [📝 Notes & questions](#-notes & questions)
-* [💡 Useful informations](#-useful informations)
 
 ## 💻 NPM commands
 * `npm start` : The classical, starts the React project
