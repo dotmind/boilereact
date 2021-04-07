@@ -1,44 +1,105 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# .boilereact
 
-## Available Scripts
+**Menu**
 
-In the project directory, you can run:
+* [💻 NPM commands](#-npm-commands)
+* [👶🏻 Onboarding](#-onboarding)
+* [👷‍♂️ How it's work](#-how-its-work])
 
-### `npm start`
+## 💻 NPM commands
+* `npm start` : The classical, starts the React project
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+*other commands*
+* `npm run build` : Build the React project
+* `npm run lint` : Run eslint check
+* `npm run lint:fix` : Run an eslint check with the flag --fix (cf.eslint cli), auto-fix commons synthax errors
+* `npm run test` : Run the Jest unit tests in watch mode. It allows any actions :
+```bash
+Watch Usage
+ › Press a to run all tests.
+ › Press f to run only failed tests.
+ › Press q to quit watch mode.
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press Enter to trigger a test run.
+ ```
+* `npm run test:coverage` : Run the Jest unit tests and generate a coverage tracking page, a list that details all the testing coverage of the app. It creates a coverage folder at the project root with all the coverage page assets.
+* `npm run storybook` : Run the complete UI kit interactive documentation powered by storybook. More info [here](#-storybook)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 👶🏻 Onboarding
 
-### `npm test`
+### ⚠️ What do you need  to know before starting :
+This project is based on a CRA (Create React App) typescript bootstrap setup :
+- [CRA](https://create-react-app.dev/docs/adding-typescript/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You will need to have NodeJS install on your machine :
+- [Node JS](https://nodejs.org/en/download/)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 1️⃣ Install packages *(✅ required)...*
+```bash
+npm i
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### 2️⃣ ...and run the server *(✅ required)*
+```bash
+npm start
+```
+🎉
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 👷‍♂️ How it's work
 
-### `npm run eject`
+### Stack 📚
+#### Bootstrap
+- Create-react-app
+#### App State Management
+- [react-redux](https://redux.js.org/introduction/getting-started)
+- [redux-saga](https://redux-saga.js.org/)
+#### HTTP Client
+- [axios](https://github.com/axios/axios)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Precommit
+- [husky](https://typicode.github.io/husky/#/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Storybook
+The project embarks an exhaustive listing of fragments (eg. basic and scalables components based on the UI kit figma spec), you can play with props of some very scalable fragments like button, and you'll see a real-time render.
+The storybook runs on the default 6006 port, eg.localhost:6006.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Architecture
+The project architecture follows a modular feature-oriented architecture.
+At the root you can find :
+```
+    .storybook/ // storybook config files.
+    public/ // public assets.
+    src/ // the hot topic ! The React project source files.
+```
+Let's have a deeper look at the `src` folder 🔍
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+assets/
+feature/
+  components/
+    MyFeature.tsx
+    MyFeature.module.scss
+internal/
+  components/
+    App.tsx
+    App.module.scss
+```
 
-## Learn More
+### Why there's many branch in this boilerplate ?
+Well, the goal is to have as many starter pack as we need to avoid loss of time.
+For now, there's two starters, redux-toolkit ready w/ full hook support and redux-saga ready (the good ol' .mind way ! 🤠).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### How about StyleSheet ?
+We use Sass with CSS modules ➡️ `**/*.module.scss`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### How about StyleSheet ?
+What's comming next ?
+  - UNIT TESTS with JEST
+  - STORYBOOK for UI Documentation
+  - More branch with more starter pack
+
+## 📝 Notes & questions
+
+> The first rule about fight club is you don't talk about fight club 🙃
